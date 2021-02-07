@@ -1,0 +1,11 @@
+ALGORITHM Sum_distinct_elements
+VAR
+    setA : ARRAY_OF INTEGER[50];
+    setB : ARRAY_OF INTEGER[50];
+    distinctElementsTab : ARRAY_OF INTEGER[100]
+    i,j : INTEGER
+BEGIN
+    Read(setA);
+    Read(setB);
+    set_instructions
+END
