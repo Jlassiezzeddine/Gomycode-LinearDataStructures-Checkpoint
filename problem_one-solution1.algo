@@ -1,0 +1,73 @@
+/* Problem 1 : First Solution  using a table*/
+
+ALGORITHM Sum_distinct_elements
+VAR
+    setA : ARRAY_OF INTEGER[50];
+    setB : ARRAY_OF INTEGER[50];
+    mergedElementsTab : ARRAY_OF INTEGER[100];
+    i,j : INTEGER
+BEGIN
+    Read(setA);
+    Read(setB);
+
+    //Function to merge set into mergedElementsTab
+    FUNCTION mergeSets(set) : ARRAY_OF INTEGER
+        VAR 
+            
+            
+        BEGIN
+        i := 0;
+            FOR i FROM 0 TO set.length - 1  STEP 1  DO
+                mergedElementsTab.push(set[i]);
+                i++;
+            END_FOR
+            RETURN mergedElementsTab ;
+    END //End mergeSets()
+
+    //Run the function for each set
+    mergeSets(setA);
+    mergeSets(setB);
+
+    //Process the mergedElementsTab to check for unique values
+    FUNCTION uniqueValues() :  ARRAY_OF INTEGER[100];
+        VAR
+            count : INTEGER ;
+            uniqueValuesArray : ARRAY_OF INTEGER[100];
+            
+        BEGIN
+            i := 0;
+            FOR i FROM 0 TO mergedElementsTab.length - 1  STEP 1  DO
+                count := 0;
+                j := 0;
+                FOR j FROM 0 TO mergedElementsTab.length - 1  STEP 1  DO
+                    IF (mergedElementsTab[i] === mergedElementsTab[j]) THEN
+                        count := count + 1;
+                        j++;
+                    END_IF
+                END_FOR
+                    IF (count === 1) THEN
+                        uniqueValuesArray.push(mergedElementsTab[i])
+                    END_IF
+                i++;
+            END_FOR
+            RETURN uniqueValuesArray ;
+    END //End UniqueValues()
+    
+    //Sum the values of uniqueValuesArray
+    FUNCTION sumFunction() : INTEGER
+        VAR
+            sum: INTEGER := 0;
+            
+        BEGIN
+            i:= 0 ;
+            FOR i FROM 0 TO uniqueValuesArray.length - 1  STEP 1  DO
+                sum := sum + uniqueValuesArray[i];
+                i++;
+            END_FOR
+            RETURN sum ;
+    END //End sum()
+    
+    uniqueValues();
+    sumFunction();
+    Write(sum);
+END
