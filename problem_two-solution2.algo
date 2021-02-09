@@ -1,12 +1,12 @@
-/* Problem 1 : Second Solution using an hashtable */
+/* Problem 1 : First Solution  using a table*/
 
-ALGORITHM Sum_distinct_elements
+ALGORITHM Overlapping_sum
 VAR
     setA : ARRAY_OF INTEGER[50];
     setB : ARRAY_OF INTEGER[50];
     htabMerged : HASH_TABLE<INTEGER,INTEGER>;
-    uniqueValuesArray : ARRAY_OF INTEGER[100];
-    i,j, count : INTEGER
+    commonElementsArray : ARRAY_OF INTEGER[100];
+    i,j:INTEGER
 BEGIN
     Read(setA);
     Read(setB);
@@ -38,38 +38,38 @@ BEGIN
             RETURN htabMerged ;
     END// End mergeSets()
 
-    //Retrieve unique values from the hashtable and insert them in uniqueValuesArray
-    FUNCTION commonElements() : ARRAY_OF INTEGER[100];
+    //Retrieve common elements from the hashtable and insert them in commonElementsArray
+    FUNCTION uniqueValues() : ARRAY_OF INTEGER[100];
         VAR
             
         BEGIN
             FOR i FROM 0 TO setA.length - 1 STEP 1  DO
-                IF (htabMerged.get(setA[i]) = 1) THEN
-                    uniqueValuesArray.push(setA[i]);
+                IF (htabMerged.get(setA[i]) !== 1) THEN
+                    commonElementsArray.push(setA[i]);
                 END_IF
             END_FOR
             FOR j FROM 0 TO setB.length - 1 STEP 1  DO
-                IF (htabMerged.get(setB[j]) = 1) THEN
-                    uniqueValuesArray.push(setB[j]);
+                IF (htabMerged.get(setB[j]) !== 1) THEN
+                    commonElementsArray.push(setB[j]);
                 END_IF
             END_FOR
-            RETURN uniqueValuesArray ;
+            RETURN commonElementsArray ;
     END // End uniqueValues()
-    
-    //sum the unique values
+
+    //sum common elements values
     FUNCTION sumFunction() : INTEGER
         VAR
             
         BEGIN
             sum := 0;
-            FOR i FROM 0 TO uniqueValuesArray.length - 1 STEP 1  DO
-                sum := sum + uniqueValuesArray[i];
+            FOR i FROM 0 TO commonElementsArray.length - 1 STEP 1  DO
+                sum := sum + commonElementsArray[i];
             END_FOR
             RETURN sum ;
     END //End sumFunction()
 
     mergeSets();
-    commonElements();
+    uniqueValues();
     sumFunction();
     Write(sum);
 END

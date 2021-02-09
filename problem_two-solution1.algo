@@ -1,0 +1,71 @@
+/* Problem 2 Solution 1 : using array  */
+
+ALGORITHM Overlapping_sum
+VAR
+    setA : ARRAY_OF INTEGER[50];
+    setB : ARRAY_OF INTEGER[50];
+    mergedSets : ARRAY_OF INTEGER[100];
+    commonElementsArray : ARRAY_OF INTEGER[100];
+    i,j,count : INTEGER
+    
+BEGIN
+
+    Read(setA);
+    Read(setB);
+    
+    //Function to merge set into mergedElementsTab
+    FUNCTION mergeSets(set) : ARRAY_OF INTEGER
+        BEGIN
+        i := 0;
+            FOR i FROM 0 TO set.length - 1  STEP 1  DO
+                mergedElementsTab.push(set[i]);
+                i++;
+            END_FOR
+            RETURN mergedElementsTab ;
+    END //End mergeSets()
+
+    //Run the function for each set
+    mergeSets(setA);
+    mergeSets(setB);
+
+    //Function to retreive Common elements
+    FUNCTION commonElements() : ARRAY_OF type[100];
+        VAR
+            
+        BEGIN
+            i := 0;
+                FOR i FROM 0 TO mergedElementsTab.length - 1  STEP 1  DO
+                    count := 0;
+                    j := 0;
+                    FOR j FROM 0 TO mergedElementsTab.length - 1  STEP 1  DO
+                        IF (mergedElementsTab[i] === mergedElementsTab[j]) THEN
+                            count := count + 1;
+                            j++;
+                        END_IF
+                    END_FOR
+                        IF (count <> 1) THEN
+                            commonElementsArray.push(mergedElementsTab[i])
+                        END_IF
+                    i++;
+                END_FOR
+            RETURN commonElementsArray ;
+    END // End commonElements()
+
+    //Sum the values of commonElementsArray
+    FUNCTION sumFunction() : INTEGER
+        VAR
+            sum: INTEGER := 0;
+            
+        BEGIN
+            i:= 0 ;
+            FOR i FROM 0 TO commonElementsArray.length - 1  STEP 1  DO
+                sum := sum + commonElementsArray[i];
+                i++;
+            END_FOR
+            RETURN sum ;
+    END //End sum()
+
+    commonElements();
+    sumFunction();
+    Write(sum);
+END
