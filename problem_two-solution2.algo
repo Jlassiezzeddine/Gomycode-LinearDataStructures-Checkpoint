@@ -6,7 +6,7 @@ VAR
     setB : ARRAY_OF INTEGER[50];
     htabMerged : HASH_TABLE<INTEGER,INTEGER>;
     commonElementsArray : ARRAY_OF INTEGER[100];
-    i,j:INTEGER
+    i,j, count:INTEGER
 BEGIN
     Read(setA);
     Read(setB);
